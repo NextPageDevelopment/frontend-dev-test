@@ -17,6 +17,7 @@
     ]
   },
   "include": [
+      "src/**/*",
       "src/main.ts",
       "src/polyfills.ts",
       "node_modules/stub",

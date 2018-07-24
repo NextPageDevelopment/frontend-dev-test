@@ -1,16 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from 'stub';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+// import { AuthService } from 'stub';
+import { AuthService } from '../../shared/services/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Account } from 'common';
+
 
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit {
 
-    private account: Account;
+    private account;
     private subscriptions: Subscription[] = [];
 
     constructor(private authService: AuthService) { }
@@ -27,11 +29,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
-        this.subscriptions.push(
-            this.authService.profile$.subscribe(
-                (profile: Account) => this.account = profile
-            )
-        );
+        this.authService.profile.subscribe( value => {
+            if(Object.keys(value).length == 0){
+                this.account = undefined;     
+            }else{
+                this.account = value
+            }
+               
+        });
+        
     }
 
     public ngOnDestroy(): void {
