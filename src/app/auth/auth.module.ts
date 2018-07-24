@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from '../../app/shared/services/auth.service';
-import { HttpModule } from '@angular/http';
 import { LogoutComponent } from './logout/logout.component';
 const routes: Routes = [
   {
@@ -23,12 +22,13 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule, HttpModule,
+    HttpClientModule,
     RouterModule.forChild(routes)
   ],
   declarations: [LoginComponent, LogoutComponent],
   providers: [
       AuthService
-  ]
+  ],
+  exports: [FormsModule]
 })
 export class AuthModule { }

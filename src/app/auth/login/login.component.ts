@@ -18,14 +18,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    this.authservice.login(this.loginForm.value).subscribe(
+  onSubmit(loginForm) {
+    this.authservice.login(loginForm.value).subscribe(
       (result) => {
-        this.authservice.setToken(result['_body']);
-        this.router.navigate(['secure']); 
+        this.authservice.setToken(result);
+        this.router.navigate(['secure']);
       },
       (err) => {
-          console.log(err);
+          if (err.error.text) {
+            this.authservice.setToken(err.error.text);
+            this.router.navigate(['secure']);
+          }
       }
     );
   }

@@ -6,11 +6,12 @@ import { Account } from 'common';
 
 
 @Component({
+    providers: [AuthService],
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
 
     private account;
     private subscriptions: Subscription[] = [];
@@ -30,14 +31,12 @@ export class NavbarComponent implements OnInit {
 
     public ngOnInit(): void {
         this.authService.profile.subscribe( value => {
-            if(Object.keys(value).length == 0){
-                this.account = undefined;     
-            }else{
-                this.account = value
+            if (Object.keys(value).length === 0) {
+                this.account = undefined;
+            } else {
+                this.account = value;
             }
-               
         });
-        
     }
 
     public ngOnDestroy(): void {

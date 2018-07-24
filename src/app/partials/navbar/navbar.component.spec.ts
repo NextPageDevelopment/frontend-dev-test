@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule} from '@angular/router/testing';
-
+import { HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import { NavbarComponent } from './navbar.component';
-import { AuthService } from 'stub';
+import { AuthService } from '../../shared/services/auth.service';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -12,7 +12,7 @@ describe('NavbarComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ NavbarComponent ],
       providers: [AuthService],
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule, HttpClientTestingModule]
     })
     .compileComponents();
   }));

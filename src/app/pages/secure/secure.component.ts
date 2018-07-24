@@ -6,7 +6,7 @@ import { AuthService } from '../../shared/services/auth.service';
   styleUrls: ['./secure.component.css']
 })
 export class SecureComponent implements OnInit {
-  constructor(private authService : AuthService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.authService.getProfile();

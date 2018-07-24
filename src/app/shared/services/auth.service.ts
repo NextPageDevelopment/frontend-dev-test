@@ -1,54 +1,36 @@
-import {
-  Injectable
-} from '@angular/core';
-import {
-  tap
-} from 'rxjs/operators';
-import {
-  Http,
-  Headers,
-  URLSearchParams,
-  RequestOptions
-} from '@angular/http';
-import {
-  BehaviorSubject
-} from 'rxjs';
-import 'rxjs/add/operator/map'
+import { Injectable } from '@angular/core';
+import { HttpHeaders , HttpClient} from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import 'rxjs/add/operator/map';
 @Injectable()
 export class AuthService {
 
   loginUrl: any = 'https://dev-test-service.madebywiser.com/login';
-  private headers = new Headers();
-  private options: RequestOptions = new RequestOptions({
-    headers: this.headers
-  });
+
   authenticationUrl: any = 'https://dev-test-service.madebywiser.com/me';
   public profile: BehaviorSubject < object > = new BehaviorSubject < object > ({});
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   login(user) {
-    this.headers.append('authorization', 'Basic ' + btoa(user.username + ':' + user.password));
-    return this.http.get(this.loginUrl, this.options).pipe(
-      tap(
-        data => data,
-        error => error
-      )
-    );
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Basic ' + btoa(user.username + ':' + user.password));
+    return this.http.get(this.loginUrl, {headers}).map(result => result);
   }
 
   me() {
     const token = localStorage.getItem('token');
-    this.headers.append('authorization', token);
-    return this.http.get(this.authenticationUrl, this.options)
-      .map(result => JSON.parse(result['_body']))
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', token);
+    return this.http.get(this.authenticationUrl, {headers})
+      .map(result => result);
   }
 
   getProfile() {
     return this.me().subscribe(
       (data) => {
-        this.profile.next(data)
+        this.profile.next(data);
       }
-    )
+    );
   }
   isAuthenticated() {
     const token = localStorage.getItem('token');

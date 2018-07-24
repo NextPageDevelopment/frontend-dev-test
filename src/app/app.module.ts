@@ -2,8 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpStatusModule } from 'http-status-pipe';
-import { HttpModule } from '@angular/http';
-// import { AuthService } from 'stub';
+import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuardService } from './shared/services/auth.guard.service';
 import { AppComponent } from './app.component';
@@ -47,7 +46,7 @@ const routes: Routes = [
     ],
     imports: [
         BrowserModule,
-        HttpModule,
+        HttpClientModule,
         RouterModule.forRoot(routes),
         HttpStatusModule
     ],
