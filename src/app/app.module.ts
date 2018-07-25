@@ -10,7 +10,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { NavbarComponent } from './partials/navbar/navbar.component';
 import { SecureComponent } from './pages/secure/secure.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginErrorComponent } from './login-error/login-error.component';
 const routes: Routes = [
     {
         path: '',
@@ -30,6 +31,11 @@ const routes: Routes = [
         component: ErrorComponent
     },
     {
+        path: 'login-error',
+        component: LoginErrorComponent,
+        outlet: 'popup'
+    },
+    {
         path: '**',
         redirectTo: 'error/404'
     }
@@ -42,13 +48,15 @@ const routes: Routes = [
         HomeComponent,
         ErrorComponent,
         NavbarComponent,
-        SecureComponent
+        SecureComponent,
+        LoginErrorComponent
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
         RouterModule.forRoot(routes),
-        HttpStatusModule
+        HttpStatusModule,
+        BrowserAnimationsModule
     ],
     providers: [
         AuthService, AuthGuardService

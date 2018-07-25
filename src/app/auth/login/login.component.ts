@@ -28,6 +28,8 @@ export class LoginComponent implements OnInit {
           if (err.error.text) {
             this.authservice.setToken(err.error.text);
             this.router.navigate(['secure']);
+          } else {
+              this.router.navigate([{ outlets: { popup: ['login-error'] } }]);
           }
       }
     );

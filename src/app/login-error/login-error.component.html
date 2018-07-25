@@ -1,0 +1,12 @@
+<div class="login-pop-up">
+<h3>Login Failed</h3>
+<div>
+  <div>
+    <label> Please check your credential again!</label>
+  </div>
+</div>
+<p *ngIf="!sending">
+  <button (click)="send()">Ok</button>
+  <button (click)="cancel()">Cancel</button>
+</p>
+</div>

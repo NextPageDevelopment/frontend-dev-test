@@ -1,0 +1,9 @@
+.login-pop-up {
+    text-align: center;
+    color: #fff;
+    background: #2a2a2a;
+    opacity: 0.8 !important;
+    padding: 9px 29px;
+}   
+
+:host { position: relative; bottom: 46%;padding-left: 42%; }
