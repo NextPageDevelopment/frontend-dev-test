@@ -6,7 +6,6 @@ import { Account } from 'common';
 
 
 @Component({
-    providers: [AuthService],
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css']
